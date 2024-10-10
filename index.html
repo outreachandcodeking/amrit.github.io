@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0; URL='https://viuuu.online'" />
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>To Vidhi, from Amrit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
-            background-color: #f3f4f6;
-            color: #333;
+            background-image: url('Screenshot.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
             line-height: 1.6;
         }
 
         .hero {
-            background-image: url('https://images.unsplash.com/photo-1504668823506-0d338ec38d95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHJvbWFudGljfGVufDB8fHx8MTYzMDUyODc3Mg&ixlib=rb-1.2.1&q=80&w=1080');
-            background-size: cover;
-            background-position: center;
-            color: white;
             text-align: center;
             padding: 100px 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text visibility */
         }
 
         .hero h1 {
-            font-size: 3em;
+            font-size: 3.5em;
             margin-bottom: 0.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .hero .subtitle {
-            font-size: 1.5em;
-            margin-bottom: 0.5em;
-            opacity: 0.8;
+            font-size: 1.8em;
+            margin-bottom: 1em;
+            opacity: 0.9;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
         .container {
@@ -49,24 +49,32 @@
         .content {
             padding: 60px 0;
             text-align: center;
+            background-color: rgba(255, 255, 255, 0.9); /* Light background for contrast */
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .content h2 {
             font-size: 2.5em;
-            color: #555;
+            color: #333;
             margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
         .content p {
             font-size: 1.2em;
             color: #666;
+            padding: 0 20px;
         }
 
         .footer {
-            background-color: #2f2f2f;
+            background-color: rgba(0, 0, 0, 0.7);
             color: white;
             text-align: center;
             padding: 30px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
 
         .footer p {
@@ -76,6 +84,24 @@
 
         footer p br {
             margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2em;
+            }
+
+            .content h2 {
+                font-size: 2em;
+            }
+
+            .content p {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
