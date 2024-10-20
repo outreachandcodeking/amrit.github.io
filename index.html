@@ -182,17 +182,49 @@
     <!-- The Popup Chatbot -->
     <div class="chat-popup" id="chatPopup">
         <header>VBot</header>
-        <p>Hello! How can I assist you today?</p>
+        <div id="chatResponse"></div>
+        <input type="text" id="userInput" placeholder="Ask something...">
+        <button onclick="sendMessage()">Send</button>
         <button class="close-button" onclick="closeChat()">Close</button>
     </div>
 
     <script>
+        const apiKey = 'AIzaSyDRMzT8ZID0iXOedaAXriCOn1DTT6UR7Ow'; // Your API key
+
         function openChat() {
             document.getElementById("chatPopup").style.display = "block";
         }
 
         function closeChat() {
             document.getElementById("chatPopup").style.display = "none";
+        }
+
+        async function sendMessage() {
+            const userMessage = document.getElementById('userInput').value;
+            const chatResponse = document.getElementById('chatResponse');
+
+            if (userMessage.trim() === '') {
+                chatResponse.innerHTML = 'Please type a message!';
+                return;
+            }
+
+            // Simulating sending a message to an API
+            const url = `https://api.dialogflow.com/v1/query?v=20150910`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    query: userMessage,
+                    lang: 'en',
+                    sessionId: '1234567890'
+                })
+            });
+
+            const data = await response.json();
+            chatResponse.innerHTML = `<p>Bot: ${data.result.fulfillment.speech}</p>`;
         }
     </script>
 </body>
