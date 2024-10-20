@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +25,7 @@
         .hero {
             text-align: center;
             padding: 100px 0;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text visibility */
         }
 
         .hero h1 {
@@ -50,7 +49,7 @@
         .content {
             padding: 60px 0;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.9); /* Light background for contrast */
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
@@ -66,6 +65,10 @@
             font-size: 1.2em;
             color: #666;
             padding: 0 20px;
+        }
+
+        .chatbot-container {
+            margin-top: 30px;
         }
 
         .footer {
@@ -104,57 +107,8 @@
                 font-size: 1em;
             }
         }
-
-        /* Popup Chatbot */
-        .chat-popup {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            border: 3px solid #f1f1f1;
-            z-index: 9;
-            background-color: white;
-            width: 300px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .chat-popup header {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .chat-popup p {
-            color: #666;
-        }
-
-        .open-button {
-            background-color: #333;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            border-radius: 5px;
-        }
-
-        .close-button {
-            background-color: #333;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            float: right;
-        }
-
     </style>
 </head>
-
 <body>
     <header class="hero">
         <div class="container">
@@ -170,63 +124,34 @@
         </div>
     </section>
 
+    <!-- Chatbot Integration -->
+    <div class="chatbot-container">
+        <iframe
+            src="https://www.chatbase.co/chatbot-iframe/qhEVTD573ArgMg22VyBRP"
+            width="100%"
+            style="height: 100%; min-height: 700px"
+            frameborder="0">
+        </iframe>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <p>With all my love, <br> Amrit</p>
         </div>
     </footer>
 
-    <!-- Chatbot button -->
-    <button class="open-button" onclick="openChat()">Chat with VBot</button>
-
-    <!-- The Popup Chatbot -->
-    <div class="chat-popup" id="chatPopup">
-        <header>VBot</header>
-        <div id="chatResponse"></div>
-        <input type="text" id="userInput" placeholder="Ask something...">
-        <button onclick="sendMessage()">Send</button>
-        <button class="close-button" onclick="closeChat()">Close</button>
-    </div>
-
+    <!-- Chatbot Script -->
     <script>
-        const apiKey = 'AIzaSyDRMzT8ZID0iXOedaAXriCOn1DTT6UR7Ow'; // Your API key
-
-        function openChat() {
-            document.getElementById("chatPopup").style.display = "block";
-        }
-
-        function closeChat() {
-            document.getElementById("chatPopup").style.display = "none";
-        }
-
-        async function sendMessage() {
-            const userMessage = document.getElementById('userInput').value;
-            const chatResponse = document.getElementById('chatResponse');
-
-            if (userMessage.trim() === '') {
-                chatResponse.innerHTML = 'Please type a message!';
-                return;
-            }
-
-            // Simulating sending a message to an API
-            const url = `https://api.dialogflow.com/v1/query?v=20150910`;
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    query: userMessage,
-                    lang: 'en',
-                    sessionId: '1234567890'
-                })
-            });
-
-            const data = await response.json();
-            chatResponse.innerHTML = `<p>Bot: ${data.result.fulfillment.speech}</p>`;
+        window.embeddedChatbotConfig = {
+            chatbotId: "qhEVTD573ArgMg22VyBRP",
+            domain: "www.chatbase.co"
         }
     </script>
+    <script
+        src="https://www.chatbase.co/embed.min.js"
+        chatbotId="qhEVTD573ArgMg22VyBRP"
+        domain="www.chatbase.co"
+        defer>
+    </script>
 </body>
-
 </html>
