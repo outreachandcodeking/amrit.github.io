@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,7 @@
         .hero {
             text-align: center;
             padding: 100px 0;
-            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text visibility */
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         .hero h1 {
@@ -49,7 +50,7 @@
         .content {
             padding: 60px 0;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9); /* Light background for contrast */
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
@@ -103,8 +104,57 @@
                 font-size: 1em;
             }
         }
+
+        /* Popup Chatbot */
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+            background-color: white;
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-popup header {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .chat-popup p {
+            color: #666;
+        }
+
+        .open-button {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border-radius: 5px;
+        }
+
+        .close-button {
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            float: right;
+        }
+
     </style>
 </head>
+
 <body>
     <header class="hero">
         <div class="container">
@@ -125,5 +175,26 @@
             <p>With all my love, <br> Amrit</p>
         </div>
     </footer>
+
+    <!-- Chatbot button -->
+    <button class="open-button" onclick="openChat()">Chat with VBot</button>
+
+    <!-- The Popup Chatbot -->
+    <div class="chat-popup" id="chatPopup">
+        <header>VBot</header>
+        <p>Hello! How can I assist you today?</p>
+        <button class="close-button" onclick="closeChat()">Close</button>
+    </div>
+
+    <script>
+        function openChat() {
+            document.getElementById("chatPopup").style.display = "block";
+        }
+
+        function closeChat() {
+            document.getElementById("chatPopup").style.display = "none";
+        }
+    </script>
 </body>
+
 </html>
