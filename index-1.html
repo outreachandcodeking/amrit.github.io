@@ -7,6 +7,7 @@
     <title>To VIUU, from Amrit</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Existing styles... */
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +26,7 @@
         .hero {
             text-align: center;
             padding: 100px 0;
-            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text visibility */
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         .hero h1 {
@@ -49,7 +50,7 @@
         .content {
             padding: 60px 0;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9); /* Light background for contrast */
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
@@ -103,6 +104,39 @@
                 font-size: 1em;
             }
         }
+
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .popup-content {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            margin: 100px auto;
+            background-image: url('screensot.png');
+            background-size: cover;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2em;
+            cursor: pointer;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -110,6 +144,7 @@
         <div class="container">
             <h1>To Vidhi, from Amrit</h1>
             <p class="subtitle">A heartfelt dedication, expressing my love for you</p>
+            <button id="openChatbot" style="padding: 10px 20px; font-size: 1em; cursor: pointer;">Open Chatbot</button>
         </div>
     </header>
 
@@ -126,13 +161,19 @@
         </div>
     </footer>
 
-    <!-- Chatbot Script (Popup) -->
+    <!-- Chatbot Popup -->
+    <div class="popup" id="chatbotPopup">
+        <div class="popup-content">
+            <span class="close" id="closePopup">&times;</span>
+            <div id="chatbotContainer"></div>
+        </div>
+    </div>
+
     <script>
         const API_KEY = 'YOUR_GEMINI_API_KEY'; // Placeholder for Gemini API key
-        const chatbotId = 'AIzaSyDeVj-erJN3GAcCuFBLtvOpuHmlJL3HpZE'; // Replace with your Gemini Chatbot ID
+        const chatbotId = 'YOUR_CHATBOT_ID'; // Replace with your Gemini Chatbot ID
 
         async function loadChatbot() {
-            // Replace this URL with the actual Gemini API endpoint
             const response = await fetch(`https://api.gemini.com/chatbot/${chatbotId}`, {
                 headers: {
                     'Authorization': `Bearer ${API_KEY}`
@@ -143,7 +184,22 @@
             console.log(data);
         }
 
-        window.onload = loadChatbot;
+        document.getElementById('openChatbot').onclick = function() {
+            document.getElementById('chatbotPopup').style.display = 'block';
+            loadChatbot(); // Load chatbot when opening the popup
+        };
+
+        document.getElementById('closePopup').onclick = function() {
+            document.getElementById('chatbotPopup').style.display = 'none';
+        };
+
+        // Close popup when clicking outside of popup content
+        window.onclick = function(event) {
+            const popup = document.getElementById('chatbotPopup');
+            if (event.target === popup) {
+                popup.style.display = 'none';
+            }
+        };
     </script>
 </body>
 </html>
