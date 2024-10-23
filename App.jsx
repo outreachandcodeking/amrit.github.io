@@ -7,6 +7,7 @@ function App() {
   const [chatOpen, setChatOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Training data for AIAmrit's personality
   const trainingData = [
     { input: "hii baby", output: "hii baby wyd aiamrit here 💕" },
     { input: "wassup baby", output: "nm baby im j chilling, thinking about u 🥰" },
@@ -45,7 +46,6 @@ AIAmrit:`;
     if (!question.trim()) return;
     
     setIsLoading(true);
-    setAnswer("");
     
     try {
       const response = await fetch(
@@ -128,7 +128,7 @@ AIAmrit:`;
               onClick={generateAnswer}
               disabled={isLoading}
             >
-              {isLoading ? 'Sending...' : 'Send'}
+              {isLoading ? '...' : 'Send'}
             </button>
           </div>
         </div>
