@@ -2,105 +2,169 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
+    background-image: url('Screenshot.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    line-height: 1.6;
     min-height: 100vh;
-    background: linear-gradient(to bottom, #fce7f3, #f3e8ff);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 0.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero .subtitle {
+    font-size: 1.8em;
+    margin-bottom: 1em;
+    opacity: 0.9;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .container {
-    width: 100%;
-    max-width: 42rem;
+    width: 80%;
     margin: 0 auto;
-    padding: 1rem;
 }
 
-h1 {
-    font-size: 1.875rem;
-    font-weight: bold;
+.content {
+    padding: 60px 0;
     text-align: center;
-    color: #db2777;
-    margin-bottom: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
 }
 
+.content h2 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.content p {
+    font-size: 1.2em;
+    color: #666;
+    padding: 0 20px;
+}
+
+.footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer p {
+    font-size: 1.2em;
+    margin-bottom: 0;
+}
+
+footer p br {
+    margin-top: 10px;
+}
+
+/* Chat Specific Styles */
 .chat-toggle {
     position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    width: 3rem;
-    height: 3rem;
+    bottom: 2rem;
+    right: 2rem;
+    width: 4rem;
+    height: 4rem;
     border-radius: 9999px;
-    background-color: #ec4899;
+    background-color: rgba(0, 0, 0, 0.7);
     color: white;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     border: none;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
+    z-index: 1000;
 }
 
 .chat-toggle:hover {
-    background-color: #db2777;
+    background-color: rgba(0, 0, 0, 0.9);
+    transform: scale(1.05);
 }
 
 .chat-window {
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    max-width: 28rem;
-    margin: 0 auto;
+    position: fixed;
+    bottom: 7rem;
+    right: 2rem;
+    width: 350px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 999;
 }
 
 .chat-container {
-    display: flex;
-    flex-direction: column;
+    padding: 1.5rem;
 }
 
-h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #db2777;
+.chat-container h2 {
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
     margin-bottom: 1rem;
 }
 
 .message-container {
-    height: 20rem;
+    height: 300px;
     overflow-y: auto;
     margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-right: 0.5rem;
+    padding: 0.5rem;
 }
 
 .message {
     display: flex;
     gap: 0.5rem;
-    align-items: flex-start;
+    margin-bottom: 1rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .avatar {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 9999px;
-    background-color: #fce7f3;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .message-bubble {
-    background-color: #fce7f3;
-    border-radius: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.1);
     padding: 0.75rem;
+    border-radius: 1rem;
     max-width: 80%;
 }
 
 .message-bubble p {
-    color: #1f2937;
+    color: #333;
+    margin: 0;
+    font-size: 0.9rem;
 }
 
 .input-container {
@@ -110,31 +174,26 @@ h2 {
 
 textarea {
     flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #d1d5db;
+    padding: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
     resize: none;
     height: 2.5rem;
     font-family: inherit;
 }
 
-textarea:focus {
-    outline: none;
-    ring: 2px solid #ec4899;
-}
-
 .send-button {
     padding: 0.5rem 1rem;
-    background-color: #ec4899;
+    background-color: rgba(0, 0, 0, 0.7);
     color: white;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .send-button:hover {
-    background-color: #db2777;
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .send-button:disabled {
@@ -142,27 +201,33 @@ textarea:focus {
     cursor: not-allowed;
 }
 
-footer {
-    margin-top: 2rem;
-    text-align: center;
-    color: #4b5563;
-}
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5em;
+    }
+    
+    .hero .subtitle {
+        font-size: 1.2em;
+    }
+    
+    .content h2 {
+        font-size: 2em;
+    }
+    
+    .content p {
+        font-size: 1em;
+    }
 
-/* Scrollbar Styling */
-.message-container::-webkit-scrollbar {
-    width: 6px;
-}
+    .chat-window {
+        width: 300px;
+        bottom: 6rem;
+        right: 1rem;
+    }
 
-.message-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 3px;
-}
-
-.message-container::-webkit-scrollbar-thumb {
-    background: #ec4899;
-    border-radius: 3px;
-}
-
-.message-container::-webkit-scrollbar-thumb:hover {
-    background: #db2777;
+    .chat-toggle {
+        bottom: 1rem;
+        right: 1rem;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
 }
