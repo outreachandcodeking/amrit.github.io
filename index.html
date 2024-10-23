@@ -103,6 +103,56 @@
                 font-size: 1em;
             }
         }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .popup-header h3 {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .popup-body {
+            margin-top: 10px;
+        }
+
+        .popup-footer {
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .popup-btn {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -126,19 +176,70 @@
         </div>
     </footer>
 
-    <!-- Chatbot Script (Popup) -->
-    <script>
-        window.embeddedChatbotConfig = {
-            chatbotId: "qhEVTD573ArgMg22VyBRP",
-            domain: "www.chatbase.co"
+    <!-- Popup for Gemini API -->
+    <div class="popup" id="chatPopup">
+        <div class="popup-header">
+            <h3>Chat with Gemini</h3>
+            <button class="close-btn" onclick="togglePopup()">×</button>
+        </div>
+        <div class="popup-body">
+            <textarea id="userInput" rows="4" style="width: 100%;"></textarea>
+        </div>
+        <div class="popup-footer">
+            <button class="popup-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Popup Toggle Button -->
+    <button class="popup-btn" onclick="togglePopup()">Chat with Gemini</button>
+
+    <!-- Gemini API Integration Script -->
+    <script type="module">
+        import { GoogleGenerativeAI } from "https://cdn.jsdelivr.net/npm/@google/generative-ai@latest/index.min.js";
+
+        // Configure Gemini API
+        const apiKey = 'AIzaSyCdbtuThdxJkBmN5q_-YfoDR2aa1WPf4bU'; // <-- Replace with your actual API key
+        const genAI = new GoogleGenerativeAI(apiKey);
+
+        const model = await genAI.getGenerativeModel({
+            model: "gemini-1.5-flash",
+        });
+
+        const generationConfig = {
+            temperature: 1,
+            topP: 0.95,
+            topK: 64,
+            maxOutputTokens: 8192,
+            responseMimeType: "text/plain",
         };
-    </script>
-    <script
-        src="https://www.chatbase.co/embed.min.js"
-        chatbotId="qhEVTD573ArgMg22VyBRP"
-        domain="www.chatbase.co"
-        defer>
+
+        // Toggle the popup
+        function togglePopup() {
+            const popup = document.getElementById('chatPopup');
+            popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
+        }
+
+        // Send message to Gemini API directly from HTML
+        async function sendMessage() {
+            const userInput = document.getElementById('userInput').value;
+
+            try {
+                // Start a new chat session with the model
+                const chatSession = await model.startChat({
+                    generationConfig,
+                    history: [],
+                });
+
+                // Send the user's input to Gemini and get the response
+                const result = await chatSession.sendMessage(userInput);
+
+                // Display the response in an alert or add it to your UI
+                alert('Gemini says: ' + result.response);
+            } catch (error) {
+                console.error('Error sending message:', error);
+                alert('Failed to get a response from Gemini.');
+            }
+        }
     </script>
 </body>
 </html>
-
