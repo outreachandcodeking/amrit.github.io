@@ -3,17 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIAmrit Chat</title>
-    <link rel="stylesheet" href="index.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To VIUU, from Amrit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="root"></div>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script type="text/babel" src="App.jsx"></script>
-    <script type="text/babel">
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
+    <header class="hero">
+        <div class="container">
+            <h1>To Vidhi, from Amrit</h1>
+            <p class="subtitle">A heartfelt dedication, expressing my love for you</p>
+        </div>
+    </header>
+
+    <section class="content">
+        <div class="container">
+            <h2>Every moment with you feels like magic.</h2>
+            <p>You bring light, love, and endless joy into my life. I'm so grateful for you, and I promise to love you more with each passing day.</p>
+        </div>
+    </section>
+
+    <div id="chat-root"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>With all my love, <br> Amrit</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="App.js"></script>
 </body>
 </html>
