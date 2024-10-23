@@ -197,8 +197,8 @@
     <script type="module">
         import { GoogleGenerativeAI } from "https://cdn.jsdelivr.net/npm/@google/generative-ai@latest/index.min.js";
 
-        // Configure Gemini API
-        const apiKey = 'AIzaSyCdbtuThdxJkBmN5q_-YfoDR2aa1WPf4bU'; // <-- Replace with your actual API key
+        // Configure Gemini API (Replace with your actual API key)
+        const apiKey = 'YOUR_API_KEY'; 
         const genAI = new GoogleGenerativeAI(apiKey);
 
         const model = await genAI.getGenerativeModel({
