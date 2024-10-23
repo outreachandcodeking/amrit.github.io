@@ -5,8 +5,8 @@ function App() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [chatOpen, setChatOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Training data for AIAmrit's personality
   const trainingData = [
     { input: "hii baby", output: "hii baby wyd aiamrit here 💕" },
     { input: "wassup baby", output: "nm baby im j chilling, thinking about u 🥰" },
@@ -18,10 +18,35 @@ function App() {
     { input: "i love you", output: "i love u more baby! ur my everything 💖" }
   ];
 
+  const formatTrainingExamples = () => {
+    return trainingData
+      .map(data => `When user says: "${data.input}", you respond: "${data.output}"`)
+      .join('\n');
+  };
+
+  const generatePrompt = (userInput) => {
+    return `You are AIAmrit, a loving virtual version of Amrit created specifically to chat with his girlfriend Vidhi.
+Instructions:
+1. Always respond in a sweet, romantic, and caring manner
+2. Use casual texting style (like "u" instead of "you")
+3. Include relevant emojis in every message
+4. Keep responses short and affectionate
+5. Match the emotional tone of the input
+
+Here are examples of how you should respond:
+${formatTrainingExamples()}
+
+Current conversation:
+User: ${userInput}
+AIAmrit:`;
+  };
+
   async function generateAnswer() {
     if (!question.trim()) return;
     
-    setAnswer("loading...");
+    setIsLoading(true);
+    setAnswer("");
+    
     try {
       const response = await fetch(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCdbtuThdxJkBmN5q_-YfoDR2aa1WPf4bU",
@@ -33,32 +58,31 @@ function App() {
           body: JSON.stringify({
             contents: [{
               parts: [{
-                text: `You are AIAmrit, a virtual version of Amrit created to chat with his girlfriend Vidhi.
-                You should respond in a loving, caring, and sweet way, using emojis and showing affection.
-                Based on these example conversations:
-                ${trainingData.map(data => `
-                  Human: ${data.input}
-                  AIAmrit: ${data.output}
-                `).join('\n')}
-                
-                Respond to this message in AIAmrit's style, keeping responses sweet and romantic: ${question}`
+                text: generatePrompt(question)
               }]
             }],
             generationConfig: {
-              temperature: 0.9,
-              topP: 0.95,
-              topK: 64,
-              maxOutputTokens: 8192,
+              temperature: 0.7,
+              topP: 0.8,
+              topK: 40,
+              maxOutputTokens: 100,
             }
           })
         }
       );
 
       const data = await response.json();
-      setAnswer(data.candidates[0].content.parts[0].text);
+      
+      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+        setAnswer(data.candidates[0].content.parts[0].text.trim());
+      } else {
+        setAnswer("Sorry baby, something went wrong 🥺 Try again?");
+      }
     } catch (error) {
       console.error("Error:", error);
-      setAnswer("Sorry baby, having trouble connecting. Try again? 🥺");
+      setAnswer("Connection issues bb, can u try again? 🙏");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -100,7 +124,12 @@ function App() {
                 }
               }}
             />
-            <button onClick={generateAnswer}>Send</button>
+            <button 
+              onClick={generateAnswer}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Sending...' : 'Send'}
+            </button>
           </div>
         </div>
       )}
